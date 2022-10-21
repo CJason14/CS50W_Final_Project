@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job: </title>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div>
+        <div id="app">
+            <script type="text/babel">
+
+                fetch("http://127.0.0.1:8000/category")
+                .then(response=>response.json())
+                .then((data)=>{
+                    this.setState({
+                        data:data
+                    });
+                });
+                
+            function App() {
+                return (
+                    <div>Hello!</div>
+                );
+            };
+            ReactDOM.render(<App />, document.querySelector("#app"));
+            </script>
+        </div>
+    </div>
+</body>
+</html>

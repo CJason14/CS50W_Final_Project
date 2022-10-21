@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="login_div">
+    <div class="login">
+        <h2>Login</h2>
+        <br>
+        {% if message %}
+        <div>{{ message }}</div>
+        {% endif %}
+
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input autofocus class="" type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input class="" type="password" name="password" placeholder="Password">
+            </div>
+            <br>
+            <input class="btn bg-light" type="submit" value="Login">
+        </form>
+        <br>
+        Don't have an account?  <a href="{% url 'register' %}">Register here.</a>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<link href="{% static 'Job/login.css' %}" rel="stylesheet">
+{% endblock %}
