@@ -83,7 +83,4 @@ def category():
     return {"categories" : categories}
 
 def profile(request):
-    pass
-
-def company(request):
-    pass
+    return render(request, "profile.html")
