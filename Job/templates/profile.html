@@ -3,7 +3,36 @@
 
 
 {% block body %}
-  
+<div class="center">
+    <br>
+    <div class="profile_picture">
+        <img class="profile_image" src="">
+    </div>
+    <br>
+    <h2>Vorname</h2>
+    <div class="profile_content">
+        <h4>First Name:</h4>
+        <input class="profile_input" type="text" value="{{ user.firstname }}" >
+        <br>
+        <br>
+        <h4>Last Name:</h4>
+        <input class="profile_input" type="text" value="{{ user.lastname }}" >
+        <br>
+        <br>
+        <h4>Email:</h4>
+        <input class="profile_input" type="text" value="{{ user.email }}" readonly>
+        <br>
+        <br>
+        <h4>Phone Number:</h4>
+        <input class="profile_input" type="text" value="{{ user.phone_number }}" readonly>
+        <br>
+        <br>
+        <h4>Date of birth:</h4>
+        <input class="profile_input" type="text" value="{{ date_of_birth }}" readonly>
+        <br>
+    </div>
+</div>
+
 
 
 

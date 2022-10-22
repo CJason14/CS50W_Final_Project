@@ -10,3 +10,46 @@ body{
 #app{
     padding: 10px;
 }
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.profile_image{
+    width: 250px;
+}
+
+.profile_picture{
+    min-width: 250px;
+    max-width: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile_content{
+    background-color: rgba(0, 0, 0, 0.17);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 600px;
+    min-height: 300px;
+    position: relative;
+    margin-top: 20px;
+}
+
+.profile_content h4 {
+    padding: 0;
+    margin-bottom: 4px;
+}
+
+.profile_input:focus{
+    outline: none;
+    cursor: default;
+}
+
+.profile_input{
+    cursor: default;
+}
