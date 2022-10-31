@@ -9,7 +9,7 @@ from tokenize import blank_re
 from unicodedata import category, decimal
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from sqlalchemy import null, true
+from sqlalchemy import false, null, true
 
 class User(AbstractUser):
     id = models.AutoField(primary_key=True)
@@ -20,17 +20,8 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=50)
     date_of_birth = models.DateTimeField(blank=True, null=True)
     cv = models.ImageField(upload_to='images')
-
-class Company(models.Model):
-    id = models.AutoField(primary_key=True)
-    email = models.CharField(max_length=100, unique=True)
-    password = models.CharField(max_length=300)
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=1000)
-
-class Uniquecheck(models.Model):
-    id = models.AutoField(primary_key=True)
-    email = models.CharField(max_length=100, unique=True)
+    is_company = models.BooleanField()
+    description = models.CharField(max_length=1000, blank=True, null=True)
 
 class Job(models.Model):
     id = models.AutoField(primary_key=True)

@@ -1,35 +1,50 @@
-body{
+body {
     width: 100vw;
     height: 100vh;
 }
 
-.top{
+.top {
     z-index: 10;
 }
 
-#app{
+#app {
     padding: 10px;
 }
 
-.center{
+.center {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.profile_image{
-    width: 250px;
+.right {
+    display: flex;
+    justify-content: right;
 }
 
-.profile_picture{
-    min-width: 250px;
-    max-width: 250px;
+.button {
+    border: 0px;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-family: sans-serif;
+    background-color: rgba(0, 0, 0, 0.17);
+    max-width: 110px;
+    min-width: 110px;
+}
+
+.profile_image {
+    width: 180px;
+}
+
+.profile_picture {
+    min-width: 180px;
+    max-width: 180px;
     border-radius: 50%;
     overflow: hidden;
 }
 
-.profile_content{
+.profile_content {
     background-color: rgba(0, 0, 0, 0.17);
     padding: 10px;
     border-radius: 10px;
@@ -45,11 +60,17 @@ body{
     margin-bottom: 4px;
 }
 
-.profile_input:focus{
+.profile_input:focus {
     outline: none;
     cursor: default;
 }
 
-.profile_input{
+.profile_input {
     cursor: default;
+}
+
+.profile_textarea {
+    margin-top: 5px;
+    width: 550px;
+    height: 200px;
 }
