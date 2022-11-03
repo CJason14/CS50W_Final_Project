@@ -15,7 +15,8 @@
                 <form method="POST" action="{% url 'profile' %}">
                     <h4>Description:</h4>
                     {% csrf_token %}
-                    <textarea name="profile_description" class="profile_textarea" style="resize: none;">{{ user.description }}</textarea>
+                    <textarea name="profile_description" class="profile_textarea"
+                        style="resize: none;">{{ user.description }}</textarea>
                     <div class="right">
                         <input type="submit" value="Save" class="button">
                     </div>
@@ -26,19 +27,33 @@
     <div id="Jobs">
 
     </div>
-    {% block script %}
-    <script src="{% static 'Job/jobs.js' %}"></script>
-    {% endblock %}
     {% else %}
     <h1><b>User</b></h1>
     <br>
-    <div class="profile_picture">
-        <img class="profile_image" src="https://t3.ftcdn.net/jpg/03/39/45/96/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg">
-    </div>
-    <br>
-    <h2>{{ user.username }}</h2>
-    <div class="profile_content">
-        <form method="POST" action="{% url 'profile' %}">
+    <form method="POST" action="{% url 'profile' %}" enctype="multipart/form-data">
+        <div class="center">
+            <div class="profile_picture">
+                <img class="profile_image" id="output"
+                    src="https://t3.ftcdn.net/jpg/03/39/45/96/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg">
+            </div>
+            <div class="input_image_container">
+                <img class="input_image_file" src="{% static '/Job/Upload_Image.png' %}" style="background-color: white; border-radius: 8px;">
+                <input type="file" accept="image/*" class="input_image" onchange="loadFile(event)">
+            </div>
+            <script>
+            var loadFile = function(event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+                }
+            };
+            </script>
+        </div>
+        <br>
+        <h2 class="center">{{ user.username }}</h2>
+        <br>
+        <div class="profile_content">
             {% csrf_token %}
             <h4>First Name:</h4>
             <input name="first_name" class="profile_input" type="text" value="{{ user.first_name }}">
@@ -57,16 +72,24 @@
             <br>
             <br>
             <h4>Date of birth:</h4>
-            <input name="date_of_birth" class="profile_input" type="date" value="{{ user.date_of_birth }}">
+            {% if birthday %}
+            <input name="" class="profile_input" type="datetime" value="{{ birthday }}" readonly>
+            {% else %}
+            <input name="date_of_birth" class="profile_input" type="date">
+            {% endif %}
+            <br>
             <br>
             <div class="right">
                 <input type="submit" value="Save" class="button">
             </div>
-        </form>
-    </div>
-    {% endif %}
+    </form>
 </div>
-
+{% endif %}
+</div>
+{% block script %}
+    <script src="{% static 'Job/jobs.js' %}"></script>
+    <link href="{% static 'Job/profile.css' %}" rel="stylesheet">
+{% endblock %}
 
 
 

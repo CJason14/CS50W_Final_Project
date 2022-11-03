@@ -14,14 +14,15 @@ from sqlalchemy import false, null, true
 class User(AbstractUser):
     id = models.AutoField(primary_key=True)
     email = models.CharField(max_length=200, unique=True)
-    first_name = models.CharField(max_length=60)
-    last_name = models.CharField(max_length=60)
+    first_name = models.CharField(max_length=60, blank=True, null=True)
+    last_name = models.CharField(max_length=60, blank=True, null=True)
     password = models.CharField(max_length=300)
-    phone_number = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=50, blank=True, null=True)
     date_of_birth = models.DateTimeField(blank=True, null=True)
-    cv = models.ImageField(upload_to='images')
-    is_company = models.BooleanField()
+    cv = models.ImageField(upload_to='images', blank=True, null=True)
+    is_company = models.BooleanField(default = False)
     description = models.CharField(max_length=1000, blank=True, null=True)
+    image = models.ImageField(upload_to='images', blank=True)
 
 class Job(models.Model):
     id = models.AutoField(primary_key=True)
@@ -31,10 +32,17 @@ class Job(models.Model):
     salary = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.CharField(max_length=100)
 
+    def serialize(self):
+        return {
+            "title": self.title,
+            "description": self.description,
+            "salary": self.salary,
+            "category": self.category
+        }
+
 class Chat(models.Model):
     id = models.AutoField(primary_key=True)
     job_key = models.CharField(max_length=200)
     context = models.CharField(max_length=1000)
     writer = models.CharField(max_length=200)
     recipient = models.CharField(max_length=200)
-

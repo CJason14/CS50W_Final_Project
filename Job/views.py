@@ -2,6 +2,7 @@ from asyncio.windows_events import NULL
 from cgi import test
 from cmath import log
 from errno import ESTALE
+import imp
 from importlib.resources import path
 from multiprocessing import context
 from turtle import title
@@ -17,8 +18,10 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from sqlalchemy import Integer
 from .models import *
-
-
+import datetime
+import time
+import json
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
 def index(request):
     return render(request, "index.html")
@@ -93,21 +96,39 @@ def profile(request):
             last_name = request.POST["last_name"]
             email = request.POST["email"]
             phone_number = request.POST["phone_number"]
-            date_of_birth = request.POST["date_of_birth"]
-            if not date_of_birth:
+            if not request.user.date_of_birth:
+                date_of_birth = request.POST["date_of_birth"]
                 User.objects.filter(username = username).update(
                         first_name = first_name,
                         last_name = last_name,
                         email = email,
-                        phone_number = phone_number
+                        phone_number = phone_number,
+                        date_of_birth = date_of_birth
                     )
             else:
                 User.objects.filter(username = username).update(
                     first_name = first_name,
                     last_name = last_name,
                     email = email,
-                    phone_number = phone_number,
-                    date_of_birth = date_of_birth
+                    phone_number = phone_number
                 )
     user = User.objects.filter(username = username)
-    return render(request, "profile.html", {"user": user[0]})
+    if not request.user.date_of_birth:
+        birthday = ""
+    else:
+        birthday = user[0].date_of_birth.date()
+    userinformation = {
+        "user": user[0],
+        "birthday": birthday
+    }
+    return render(request, "profile.html", userinformation)
+
+
+@login_required(login_url="/login")
+def chat(request):
+    return render(request, "chat.html")
+
+
+def jobs(request):
+    jobs = Job.objects.all()
+    return JsonResponse([Job.serialize() for Job in jobs], safe=False)

@@ -10,7 +10,7 @@
         <div>{{ message }}</div>
         {% endif %}
 
-        <form action="{% url 'register' %}" method="post">
+        <form action="{% url 'register' %}" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 <input class="" autofocus type="text" name="username" placeholder="Username">

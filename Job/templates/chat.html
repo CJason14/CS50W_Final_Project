@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="Chat_Chats">
+    <p class="center">Logged in as <strong>{{ user.username }}</strong></p>
+    <hr>
+    <div class="Chat_User">
+        <div class="Chat_picture">
+            <img class="Chat_image"
+                src="https://t3.ftcdn.net/jpg/03/39/45/96/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg">
+        </div>
+            <h3>Username</h3>
+    </div>
+    <hr>
+</div>
+<div class="Chat_Contact" id="Contact">
+    <div class="Chat_picture">
+        <img class="Chat_image"
+            src="https://t3.ftcdn.net/jpg/03/39/45/96/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg">
+    </div>
+    <div>
+        <h3>Username</h3>
+    </div>
+</div>
+<div id="Chat">
+
+</div>
+<style>
+    h3{
+        margin: 0;
+        align-self: center;
+    }
+</style>
+{% endblock %}

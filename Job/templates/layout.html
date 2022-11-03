@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Job: </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="{% static 'Job/style.css' %}" rel="stylesheet">
@@ -15,7 +15,7 @@
 <body>
     <div>
         <nav class="navbar navbar-expand navbar-light bg-light top">
-            <a class="navbar-brand" href="">Job</a>
+            <a class="navbar-brand" href="{% url 'homepage' %}">Job</a>
           
             <div>
               <ul class="navbar-nav mr-auto">
@@ -26,7 +26,7 @@
                 {% endif %}
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Chat</a>
+                        <a class="nav-link" href="{% url 'chat' %}">Chat</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
