@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <div id="Jobs">
+    <div id="Jobs" class="center">
 
     </div>
     {% else %}
@@ -34,7 +34,7 @@
         <div class="center">
             <div class="profile_picture">
                 <img class="profile_image" id="output"
-                    src="https://t3.ftcdn.net/jpg/03/39/45/96/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg">
+                    src="{% if user.image %}{{ user.image.url }}{% else %}{% static '/Job/profile_picture.jpg' %}{% endif %}">
             </div>
             <div class="input_image_container">
                 <img class="input_image_file" src="{% static '/Job/Upload_Image.png' %}"
@@ -84,15 +84,12 @@
                 <input type="submit" value="Save" class="button">
             </div>
     </form>
+    {% endif %}
 </div>
-{% endif %}
 </div>
-{% block script %}
-<script src="{% static 'Job/jobs.js' %}"></script>
-<link href="{% static 'Job/profile.css' %}" rel="stylesheet">
 {% endblock %}
 
-
-
-
+{% block script %}
+<script src="{% static 'Job/jobs.js' %}"></script>
+<link href="{% static 'CSS/profile.css' %}" rel="stylesheet">
 {% endblock %}

@@ -26,12 +26,19 @@
     cursor: default;
 }
 
+.profile_content {
+    background-color: rgba(0, 0, 0, 0.17);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.profile_textarea {
+    margin-top: 5px;
+}
+
 @media (min-width: 768px) {
     .profile_content {
-        background-color: rgba(0, 0, 0, 0.17);
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         width: 600px;
         min-height: 300px;
         position: relative;
@@ -39,7 +46,6 @@
     }
 
     .profile_textarea {
-        margin-top: 5px;
         width: 550px;
         height: 200px;
     }
@@ -49,5 +55,15 @@
 @media only screen and (max-width: 768px) {
     .profile_input {
         min-width: 270px;
+    }
+
+    .profile_content {
+        min-height: 200px;
+        min-width: 90vw;
+    }
+
+    .profile_textarea{
+        height: 150px;
+        width: 80vw;
     }
 }

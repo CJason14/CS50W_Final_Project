@@ -10,7 +10,7 @@
    <p>Logged in as <strong>{{ user.username }}</strong></p>
    {% endif %}
    <hr>
-   <div id="Jobs">
+   <div id="Jobs" class="center">
    </div>
 </div>
 
@@ -18,4 +18,5 @@
 
 {% block script %}
 <script src="{% static '/Job/jobs.js' %}"></script>
+<link href="{% static 'CSS/homepage.css' %}" rel="stylesheet">
 {% endblock %}

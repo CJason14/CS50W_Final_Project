@@ -10,7 +10,7 @@
     <title>Job: </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="{% static 'Job/style.css' %}" rel="stylesheet">
+    <link href="{% static 'CSS/style.css' %}" rel="stylesheet">
     {% block script %}
     {% endblock %}
 </head>
@@ -31,6 +31,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'chat' %}">Chat</a>
                     </li>
+                    {% if user.is_company %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="">New Job</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                     </li>
