@@ -1,15 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-*{
+
+* {
     font-family: 'Poppins', sans-serif;
 }
-body{
+
+body {
     overflow: hidden;
     background-color: #2f4353;
     background-image: linear-gradient(315deg, #2f4353 0%, #d2ccc4 94%);
     background-size: cover;
     background-repeat: no-repeat;
 }
-.login_div{
+
+.login_div {
     position: fixed;
     left: 0;
     top: 0;
@@ -19,7 +22,8 @@ body{
     justify-content: center;
     align-items: center;
 }
-.login{
+
+.login {
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 35px;
