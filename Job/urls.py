@@ -14,5 +14,6 @@ urlpatterns = [
     path("register", views.register, name="register"),
     path("profile", views.profile, name="profile"),
     path("chat", views.chat, name="chat"),
-    path("jobs", views.jobs, name="jobs")
+    path("jobs", views.jobs, name="jobs"),
+    path("settings", views.settings, name="settings")
 ]

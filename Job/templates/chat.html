@@ -7,7 +7,7 @@
     <hr>
     <div class="Chat_User">
         <div class="Chat_picture">
-            <img class="Chat_image" src="{% static '/Job/profile_picture.jpg' %}">
+            <img class="Chat_image" src="{% static 'images/profile_picture.jpg' %}">
         </div>
         <h3>Username</h3>
     </div>
@@ -15,7 +15,7 @@
 </div>
 <div class="Chat_Contact" id="Contact">
     <div class="Chat_picture">
-        <img class="Chat_image" src="{% static '/Job/profile_picture.jpg' %}">
+        <img class="Chat_image" src="{% static 'images/profile_picture.jpg' %}">
     </div>
     <div>
         <h3>Username</h3>
@@ -30,4 +30,8 @@
         align-self: center;
     }
 </style>
+{% endblock %}
+
+{% block title %} 
+    Chat
 {% endblock %}

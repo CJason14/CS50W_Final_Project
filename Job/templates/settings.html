@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="center">
+    <div class="job"></div>
+</div>
+<div class="container">
+
+    <div class="switch-holder">
+        <div class="switch-label">
+            <i class="fa fa-wifi"></i><span>Darkmode</span>
+        </div>
+        <div class="switch-toggle">
+            <input type="checkbox" id="Darkmode" onclick="Darkmode()">
+            <label for="Darkmode"></label>
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script src="{% static 'JS/settings.js' %}"></script>
+<link href="{% static 'CSS/settings.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} 
+    Settings
+{% endblock %}

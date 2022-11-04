@@ -34,10 +34,10 @@
         <div class="center">
             <div class="profile_picture">
                 <img class="profile_image" id="output"
-                    src="{% if user.image %}{{ user.image.url }}{% else %}{% static '/Job/profile_picture.jpg' %}{% endif %}">
+                    src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'images/profile_picture.jpg' %}{% endif %}">
             </div>
             <div class="input_image_container">
-                <img class="input_image_file" src="{% static '/Job/Upload_Image.png' %}"
+                <img class="input_image_file" src="{% static 'images/Upload_Image.png' %}"
                     style="background-color: white; border-radius: 8px;">
                 <input type="file" accept="image/*" class="input_image" onchange="loadFile(event)">
             </div>
@@ -90,6 +90,10 @@
 {% endblock %}
 
 {% block script %}
-<script src="{% static 'Job/jobs.js' %}"></script>
+<script src="{% static 'JS/jobs.js' %}"></script>
 <link href="{% static 'CSS/profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} 
+    Profile
 {% endblock %}

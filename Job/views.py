@@ -132,3 +132,6 @@ def chat(request):
 def jobs(request):
     jobs = Job.objects.all()
     return JsonResponse([Job.serialize() for Job in jobs], safe=False)
+
+def settings(request):
+    return render(request, "settings.html")
