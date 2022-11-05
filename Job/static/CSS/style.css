@@ -1,0 +1,105 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+.dark{
+    color: black !important;
+}
+
+.light{
+    color: white !important;
+}
+
+.top {
+    z-index: 10;
+}
+
+#app {
+    padding: 10px;
+}
+
+.job {
+    background-color: rgba(0, 0, 0, 0.17);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 600px;
+    height: 300px;
+    position: relative;
+    margin-top: 20px;
+    transition: all 0.5s linear;
+    z-index: 100 !important;
+}
+
+.job_zoom{
+    position: relative;
+    top: 0;
+    width: 90vw;
+    height: 70vh;
+}
+
+@media only screen and (max-width: 768px) {
+    .job {
+        width: 90vw;
+    }
+
+    .navbar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navbar-brand{
+        margin-right: 5px !important;
+    }
+}
+
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.right {
+    display: flex;
+    justify-content: right;
+}
+
+.button {
+    border: 0px;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-family: sans-serif;
+    background-color: rgba(0, 0, 0, 0.17);
+    max-width: 110px;
+    min-width: 110px;
+}
+.input_image {
+    display: block;
+    border: 0;
+    outline: 0;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    font-size: 0;
+    position: absolute;
+    opacity: 0;
+}
+
+.input_image_file {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+}
+
+.input_image_container {
+    margin-right: -100px;
+    margin-top: -30px;
+    position: relative;
+    width: 50px;
+    height: 50px;
+}

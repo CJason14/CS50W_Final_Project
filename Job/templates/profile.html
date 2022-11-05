@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+{% load static %}
+
+
+{% block body %}
+<div class="center">
+    {% if user.is_company %}
+    <br>
+    <h1><b>Company</b></h1>
+    <br>
+    <h2>{{ user.username }}</h2>
+    <div class="profile_content">
+        <div class="center">
+            <div>
+                <form method="POST" action="{% url 'profile' %}">
+                    <h4>Description:</h4>
+                    {% csrf_token %}
+                    <textarea name="profile_description" class="profile_textarea"
+                        style="resize: none;">{{ user.description }}</textarea>
+                    <div class="right">
+                        <input type="submit" value="Save" class="button light">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="Jobs" class="center">
+
+    </div>
+    {% else %}
+    <h1><b>User</b></h1>
+    <br>
+    <form method="POST" action="{% url 'profile' %}" enctype="multipart/form-data">
+        <div class="center">
+            <div class="profile_picture">
+                <img class="profile_image" id="output"
+                    src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'images/profile_picture.jpg' %}{% endif %}">
+            </div>
+            <div class="input_image_container">
+                <img class="input_image_file" src="{% static 'images/Upload_Image.png' %}"
+                    style="background-color: white; border-radius: 8px;">
+                <input type="file" accept="image/*" class="input_image" onchange="loadFile(event)">
+            </div>
+            <script>
+                var loadFile = function (event) {
+                    var output = document.getElementById('output');
+                    output.src = URL.createObjectURL(event.target.files[0]);
+                    output.onload = function () {
+                        URL.revokeObjectURL(output.src) // free memory
+                    }
+                };
+            </script>
+        </div>
+        <br>
+        <h2 class="center">{{ user.username }}</h2>
+        <br>
+        <div class="profile_content">
+            {% csrf_token %}
+            <h4>First Name:</h4>
+            <input name="first_name" class="profile_input" type="text" value="{{ user.first_name }}">
+            <br>
+            <br>
+            <h4>Last Name:</h4>
+            <input name="last_name" class="profile_input" type="text" value="{{ user.last_name }}">
+            <br>
+            <br>
+            <h4>Email:</h4>
+            <input name="email" class="profile_input" type="text" value="{{ user.email }}" readonly>
+            <br>
+            <br>
+            <h4>Phone Number:</h4>
+            <input name="phone_number" class="profile_input" type="tel" value="{{ user.phone_number }}">
+            <br>
+            <br>
+            <h4>Date of birth:</h4>
+            {% if birthday %}
+            <input name="" class="profile_input" type="datetime" value="{{ birthday }}" readonly>
+            {% else %}
+            <input name="date_of_birth" class="profile_input" type="date">
+            {% endif %}
+            <br>
+            <br>
+            <div class="right">
+                <input type="submit" value="Save" class="button light">
+            </div>
+    </form>
+    {% endif %}
+</div>
+</div>
+{% endblock %}
+
+{% block script %}
+{% if user.is_company %}
+<script src="{% static 'JS/jobs.js' %}"></script>
+{% endif %}
+<link href="{% static 'CSS/profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} 
+    Profile
+{% endblock %}
