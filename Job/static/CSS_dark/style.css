@@ -1,0 +1,23 @@
+h1,h2,h3,h4,h5,h6,a,button,p{
+    color: white !important;
+}
+
+.navbar{
+    background-color: #1F1B24 !important;
+}
+
+body{
+    background-color: #121212;
+}
+
+.light{
+    color: white;
+}
+
+.job{
+    background-color: #1F1B24 !important;
+}
+
+.profile_content{
+    background-color: #1F1B24 !important;
+}

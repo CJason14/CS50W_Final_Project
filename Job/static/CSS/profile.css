@@ -66,4 +66,8 @@
         height: 150px;
         width: 80vw;
     }
+
+    body{
+        margin-bottom: 250px;
+    }
 }

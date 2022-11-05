@@ -4,6 +4,14 @@ body {
     overflow-x: hidden;
 }
 
+.dark{
+    color: black !important;
+}
+
+.light{
+    color: white !important;
+}
+
 .top {
     z-index: 10;
 }
@@ -36,6 +44,16 @@ body {
     .job {
         width: 90vw;
     }
+
+    .navbar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navbar-brand{
+        margin-right: 5px !important;
+    }
 }
 
 
@@ -60,47 +78,6 @@ body {
     max-width: 110px;
     min-width: 110px;
 }
-
-.Chat_Chats {
-    position: fixed;
-    left: 0;
-    top: 56px;
-    padding-top: 30px;
-    width: 300px;
-    height: 100vh;
-    background-color: whitesmoke;
-}
-
-.Chat_Contact {
-    padding: 3px;
-    position: fixed;
-    top: 56px;
-    left: 300px;
-    width: 100vw;
-    height: fit-content;
-    display: flex;
-    align-items: center;
-    background-color: whitesmoke;
-}
-
-.Chat_image {
-    width: 50px;
-}
-
-.Chat_picture {
-    margin-left: 20px;
-    margin-right: 10px;
-    min-width: 50px;
-    max-width: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.Chat_User {
-    display: flex;
-
-}
-
 .input_image {
     display: block;
     border: 0;

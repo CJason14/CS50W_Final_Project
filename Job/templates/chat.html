@@ -2,27 +2,29 @@
 {% load static %}
 
 {% block body %}
-<div class="Chat_Chats">
-    <p class="center">Logged in as <strong>{{ user.username }}</strong></p>
-    <hr>
-    <div class="Chat_User">
+<div id="C_Chat">
+    <div class="Chat_Chats dark">
+        <p class="center">Logged in as <strong>{{ user.username }}</strong></p>
+        <hr>
+        <div class="Chat_User" onclick="loadchat('Username')">
+            <div class="Chat_picture">
+                <img class="Chat_image" src="{% static 'images/profile_picture.jpg' %}">
+            </div>
+            <h3>Username</h3>
+        </div>
+        <hr>
+    </div>
+    <div class="Chat_Contact dark" id="Contact">
         <div class="Chat_picture">
             <img class="Chat_image" src="{% static 'images/profile_picture.jpg' %}">
         </div>
-        <h3>Username</h3>
+        <div>
+            <h3>Username</h3>
+        </div>
     </div>
-    <hr>
-</div>
-<div class="Chat_Contact" id="Contact">
-    <div class="Chat_picture">
-        <img class="Chat_image" src="{% static 'images/profile_picture.jpg' %}">
-    </div>
-    <div>
-        <h3>Username</h3>
-    </div>
-</div>
-<div id="Chat">
+    <div id="Chat" class="Chat_Messages">
 
+    </div>
 </div>
 <style>
     h3 {
@@ -32,6 +34,16 @@
 </style>
 {% endblock %}
 
-{% block title %} 
-    Chat
+{% block script %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="{% static 'JS/chat.js' %}"></script>
+<link href="{% static 'CSS/chat.css' %}" rel="stylesheet">
+{% if user.darkmode %}
+<link href="{% static 'CSS_dark/chat.css' %}" rel="stylesheet">
+{% endif %}
+{% endblock %}
+
+
+{% block title %}
+Chat
 {% endblock %}

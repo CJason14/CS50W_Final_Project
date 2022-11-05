@@ -18,7 +18,7 @@
                     <textarea name="profile_description" class="profile_textarea"
                         style="resize: none;">{{ user.description }}</textarea>
                     <div class="right">
-                        <input type="submit" value="Save" class="button">
+                        <input type="submit" value="Save" class="button light">
                     </div>
                 </form>
             </div>
@@ -81,7 +81,7 @@
             <br>
             <br>
             <div class="right">
-                <input type="submit" value="Save" class="button">
+                <input type="submit" value="Save" class="button light">
             </div>
     </form>
     {% endif %}
@@ -90,7 +90,9 @@
 {% endblock %}
 
 {% block script %}
+{% if user.is_company %}
 <script src="{% static 'JS/jobs.js' %}"></script>
+{% endif %}
 <link href="{% static 'CSS/profile.css' %}" rel="stylesheet">
 {% endblock %}
 

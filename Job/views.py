@@ -18,13 +18,19 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from sqlalchemy import Integer
 from .models import *
-import datetime
-import time
 import json
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
-    return render(request, "index.html")
+    if request.user.is_authenticated:
+        if request.user.language == "English":
+            language = English.objects.all()
+        else:
+            language = German.objects.all()
+    else:
+        language = English.objects.all()
+    return render(request, "index.html", {"language": language})
 
 def login_view(request):
     if request.method == "POST":
@@ -86,6 +92,10 @@ def category():
 
 @login_required(login_url="/login")
 def profile(request):
+    if request.user.language == "English":
+        language = English.objects.all()
+    else:
+        language = German.objects.all()
     username = request.user.username
     if request.method == "POST":
         if request.user.is_company:
@@ -119,19 +129,39 @@ def profile(request):
         birthday = user[0].date_of_birth.date()
     userinformation = {
         "user": user[0],
-        "birthday": birthday
+        "birthday": birthday,
+        "language": language
     }
     return render(request, "profile.html", userinformation)
 
 
 @login_required(login_url="/login")
 def chat(request):
-    return render(request, "chat.html")
+    if request.user.language == "English":
+        language = English.objects.all()
+    else:
+        language = German.objects.all()
+    return render(request, "chat.html", {"language": language})
 
 
 def jobs(request):
     jobs = Job.objects.all()
     return JsonResponse([Job.serialize() for Job in jobs], safe=False)
 
+@login_required(login_url="/login")
+@csrf_exempt
 def settings(request):
-    return render(request, "settings.html")
+    if request.user.language == "English":
+        language = English.objects.all()
+    else:
+        language = German.objects.all()
+    if request.method == "PUT":
+        data = json.loads(request.body)
+        username = request.user.username
+        if data["Darkmode"] == "0":
+            if request.user.darkmode:
+                User.objects.filter(username = username).update(darkmode = 0)
+            else:
+                User.objects.filter(username = username).update(darkmode = 1)
+        return JsonResponse({"changes": "worked"})
+    return render(request, "settings.html", {"language": language})

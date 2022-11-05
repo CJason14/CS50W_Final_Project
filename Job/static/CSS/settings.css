@@ -20,7 +20,7 @@
     display: flex;
     padding: 10px 20px;
     border-radius: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     justify-content: space-between;
     align-items: center;
 }
@@ -81,6 +81,12 @@
     box-shadow: -3px -3px 5px rgba(255,255,255,.5),
                 3px 3px 5px #00b33c;
 }
+
+.select{
+    display: flex;
+    align-items: center;
+}
+
 @media (max-width: 767px){
     .background{
     padding-left: 0 !important;

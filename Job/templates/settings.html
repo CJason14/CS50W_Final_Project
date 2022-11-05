@@ -3,19 +3,32 @@
 
 {% block body %}
 <div class="center">
-    <div class="job"></div>
+    <div class="job">
+        <div class="switch-holder">
+            <div class="switch-label">
+                <i class="fa fa-wifi"></i><span>Darkmode</span>
+            </div>
+            <div class="switch-toggle">
+                <input type="checkbox" id="Darkmode" onclick="Darkmode()" {% if user.darkmode %} checked {% endif %}>
+                <label for="Darkmode"></label>
+            </div>
+        </div>
+        <div class="switch-holder">
+            <div class="switch-label">
+                <i class="fa fa-wifi"></i><span>Language</span>
+            </div>
+            <div class="switch-toggle select">
+                <select class="dark" onselect="Language()">
+                    <option class="dark" value="">Please choose an option</option>
+                    <option class="dark" value="english">English</option>
+                    <option class="dark" value="german">Deutsch</option>
+                </select>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="container">
 
-    <div class="switch-holder">
-        <div class="switch-label">
-            <i class="fa fa-wifi"></i><span>Darkmode</span>
-        </div>
-        <div class="switch-toggle">
-            <input type="checkbox" id="Darkmode" onclick="Darkmode()">
-            <label for="Darkmode"></label>
-        </div>
-    </div>
 
 
 </div>
@@ -24,6 +37,11 @@
 
 {% block script %}
 <script src="{% static 'JS/settings.js' %}"></script>
+{% if user.darkmode %}
+<link href="{% static 'CSS_dark/settings.css' %}" rel="stylesheet">
+{% else %}
+<link href="{% static 'CSS_light/settings.css' %}" rel="stylesheet">
+{% endif %}
 <link href="{% static 'CSS/settings.css' %}" rel="stylesheet">
 {% endblock %}
 
