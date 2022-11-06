@@ -10,6 +10,7 @@ from unicodedata import category, decimal
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from sqlalchemy import false, null, true
+from django.utils.timezone import now
 
 class User(AbstractUser):
     id = models.AutoField(primary_key=True)
@@ -44,10 +45,17 @@ class Job(models.Model):
 
 class Chat(models.Model):
     id = models.AutoField(primary_key=True)
-    job_key = models.CharField(max_length=200)
     context = models.CharField(max_length=1000)
     writer = models.CharField(max_length=200)
     recipient = models.CharField(max_length=200)
+    timestamp = models.DateTimeField(default=now)
+
+    def serialize(self):
+        return {
+            "context": self.context,
+            "writer": self.writer,
+            "recipient": self.recipient,
+        }
 
 
 class German(models.Model):

@@ -10,8 +10,12 @@ body{
     background-color: #121212;
 }
 
+.dark{
+    color: black !important;
+}
+
 .light{
-    color: white;
+    color: white !important;
 }
 
 .job{

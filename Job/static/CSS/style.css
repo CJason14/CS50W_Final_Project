@@ -4,14 +4,6 @@ body {
     overflow-x: hidden;
 }
 
-.dark{
-    color: black !important;
-}
-
-.light{
-    color: white !important;
-}
-
 .top {
     z-index: 10;
 }

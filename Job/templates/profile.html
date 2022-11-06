@@ -28,7 +28,7 @@
 
     </div>
     {% else %}
-    <h1><b>User</b></h1>
+    <h1><b>{{ language.7.translation }}</b></h1>
     <br>
     <form method="POST" action="{% url 'profile' %}" enctype="multipart/form-data">
         <div class="center">
@@ -56,11 +56,11 @@
         <br>
         <div class="profile_content">
             {% csrf_token %}
-            <h4>First Name:</h4>
+            <h4>{{ language.8.translation }}:</h4>
             <input name="first_name" class="profile_input" type="text" value="{{ user.first_name }}">
             <br>
             <br>
-            <h4>Last Name:</h4>
+            <h4>{{ language.9.translation }}:</h4>
             <input name="last_name" class="profile_input" type="text" value="{{ user.last_name }}">
             <br>
             <br>
@@ -68,11 +68,11 @@
             <input name="email" class="profile_input" type="text" value="{{ user.email }}" readonly>
             <br>
             <br>
-            <h4>Phone Number:</h4>
+            <h4>{{ language.10.translation }}:</h4>
             <input name="phone_number" class="profile_input" type="tel" value="{{ user.phone_number }}">
             <br>
             <br>
-            <h4>Date of birth:</h4>
+            <h4>{{ language.11.translation }}:</h4>
             {% if birthday %}
             <input name="" class="profile_input" type="datetime" value="{{ birthday }}" readonly>
             {% else %}

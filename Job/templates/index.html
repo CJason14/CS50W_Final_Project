@@ -7,7 +7,7 @@
    <br>
    <h2>Jobs</h2>
    {% if user.is_authenticated %}
-   <p>Logged in as <strong>{{ user.username }}</strong></p>
+   <p>{{ language.5.translation }} <strong>{{ user.username }}</strong></p>
    {% endif %}
    <hr>
    <div id="Jobs" class="center">
@@ -17,7 +17,11 @@
 {% endblock %}
 
 {% block script %}
+{% if user.language == "English" %}
 <script src="{% static 'JS/jobs.js' %}"></script>
+{% else %}
+<script src="{% static 'JS/JS_german/jobs.js' %}"></script>
+{% endif %}
 <link href="{% static 'CSS/homepage.css' %}" rel="stylesheet">
 {% endblock %}
 

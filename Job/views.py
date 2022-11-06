@@ -163,5 +163,20 @@ def settings(request):
                 User.objects.filter(username = username).update(darkmode = 0)
             else:
                 User.objects.filter(username = username).update(darkmode = 1)
+        if data["Language"]:
+            if data["Language"] == "English":
+                User.objects.filter(username = username).update(language = "English")
+            if data["Language"] == "Deutsch":
+                User.objects.filter(username = username).update(language = "German")
         return JsonResponse({"changes": "worked"})
     return render(request, "settings.html", {"language": language})
+
+
+@login_required(login_url="/login")
+@csrf_exempt
+def messages(request):
+    data = json.loads(request.body)
+    recipient = data.get("recipient")
+    username = request.user.username
+    messages = Chat.objects.order_by("-timestamp").filter(writer = username, recipient = recipient)
+    return JsonResponse([post_content.serialize() for post_content in messages], safe=False)

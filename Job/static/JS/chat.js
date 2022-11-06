@@ -4,9 +4,34 @@ function loadchat(Username) {
 
     } else {
         clear();
-        contact(0,0);
+        contact(0, Username);
     }
 }
+
+function loadmessages(Username) {
+    fetch('/messages', {
+            method: 'POST',
+            body: JSON.stringify({
+                recipient: Username
+            })
+        })
+        .then(response => response.json())
+        .then(messages => {
+            console.log(messages);
+            for (const message in messages) {
+                console.log(messages[message].recipient)
+                const chat = document.getElementById("Chat");
+                const message_div = document.createElement("div");
+                if (messages[message].recipient == Username) {
+                    message_div.classList.add("writer");
+                } else {
+                    message_div.classList.add("recipient");
+                }
+                chat.appendChild(message_div)
+            }
+        })
+}
+
 
 function contact(url, name) {
     const contact_div = document.createElement("div");
