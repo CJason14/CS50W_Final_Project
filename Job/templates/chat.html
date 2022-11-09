@@ -8,18 +8,18 @@
         <hr>
         <div class="Chat_User" onclick="loadchat('Username')">
             <div class="Chat_picture">
-                <img class="Chat_image" src="{% static 'images/profile_picture.jpg' %}">
+                <img class="Chat_image" src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'images/profile_picture.jpg' %}{% endif %}">
             </div>
-            <h3>Username</h3>
+            <h3>{{ user.username }}</h3>
         </div>
         <hr>
     </div>
     <div class="Chat_Contact dark" id="Contact">
         <div class="Chat_picture">
-            <img class="Chat_image" src="{% static 'images/profile_picture.jpg' %}">
+            <img class="Chat_image" src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'images/profile_picture.jpg' %}{% endif %}">
         </div>
         <div>
-            <h3>Username</h3>
+            <h3>{{ user.username }}</h3>
         </div>
     </div>
     <div id="Chat" class="Chat_Messages">

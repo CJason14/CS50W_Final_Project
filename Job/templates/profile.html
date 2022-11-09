@@ -39,7 +39,7 @@
             <div class="input_image_container">
                 <img class="input_image_file" src="{% static 'images/Upload_Image.png' %}"
                     style="background-color: white; border-radius: 8px;">
-                <input type="file" accept="image/*" class="input_image" onchange="loadFile(event)">
+                <input type="file" accept="image/*" class="input_image" onchange="loadFile(event)" name="file">
             </div>
             <script>
                 var loadFile = function (event) {

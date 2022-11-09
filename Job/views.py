@@ -21,6 +21,11 @@ from .models import *
 import json
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import  render
+from django.core.files.storage import FileSystemStorage
+from django.templatetags.static import static
+import os.path
+from os import path
 
 def index(request):
     if request.user.is_authenticated:
@@ -102,6 +107,14 @@ def profile(request):
             description = request.POST["profile_description"]
             User.objects.filter(username = username).update(description = description)
         else:
+            my_file=request.FILES.get('file')
+            current_user = User.objects.filter(username = username)
+            current_image = current_user[0].image
+            fss = FileSystemStorage()
+            file = fss.save(my_file.name, my_file)
+            User.objects.filter(username = username).update(
+                image = my_file
+            )
             first_name = request.POST["first_name"]
             last_name = request.POST["last_name"]
             email = request.POST["email"]

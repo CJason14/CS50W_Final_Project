@@ -133,3 +133,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "Job.User"
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*']
