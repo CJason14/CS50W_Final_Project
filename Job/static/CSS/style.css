@@ -18,7 +18,7 @@ body {
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     width: 600px;
-    height: 300px;
+    height: fit-content;
     position: relative;
     margin-top: 20px;
     transition: all 0.5s linear;

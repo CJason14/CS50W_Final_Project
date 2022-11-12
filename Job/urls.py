@@ -18,5 +18,6 @@ urlpatterns = [
     path("settings", views.settings, name="settings"),
     path("messages", views.messages, name="messages"),
     path("contacts", views.contacts, name="contact"),
-    path("profile_picture", views.getprofilepicture, name="profile_picture")
+    path("profile_picture", views.getprofilepicture, name="profile_picture"),
+    path("new_job", views.new_job, name="new_job")
 ]

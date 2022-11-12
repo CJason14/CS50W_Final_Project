@@ -14,17 +14,6 @@ function loadjobs() {
                 const job_div = document.createElement("div");
                 job_div.classList.add('job');
                 let clicked = 0;
-                job_div.addEventListener("click", function () {
-                    if (clicked == 0){
-                        job_div.classList.add('job_zoom');
-                        clicked = 1;
-                    }
-                    else{
-                        job_div.classList.remove('job_zoom');
-                        clicked = 0;
-                    }
-
-                })
 
                 const title = document.createElement("h3");
                 const title_content = document.createTextNode(jobs[count].title);
@@ -52,6 +41,16 @@ function loadjobs() {
                 const description_content = document.createTextNode(jobs[count].description);
                 description.appendChild(description_content);
                 job_div.appendChild(description);
+
+                const apply_div = document.createElement("div");
+                apply_div.classList.add("right");
+                const apply = document.createElement("button");
+                const content = document.createTextNode("Bewerben");
+                apply.appendChild(content);
+                apply.classList.add("button");
+                apply.classList.add("light");
+                apply_div.appendChild(apply);
+                job_div.appendChild(apply_div)
 
                 document.getElementById('Jobs').appendChild(job_div);
                 count += 1;

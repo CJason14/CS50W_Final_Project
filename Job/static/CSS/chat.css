@@ -80,7 +80,7 @@
     width: 300px;
     min-height: fit-content;
     margin-top: 15px;
-    margin-right: 5px;
+    margin-right: 10px;
     background-color: green;
     border-radius: 25px;
     border-bottom-right-radius: 2px;
@@ -94,13 +94,12 @@
     width: 300px;
     min-height: fit-content;
     margin-top: 15px;
-    margin-right: 5px;
     background-color: grey;
     border-radius: 25px;
     border-bottom-left-radius: 2px;
     padding: 7px;
     padding-left: 15px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .placeholder{

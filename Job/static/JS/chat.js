@@ -30,6 +30,16 @@ function loadcontacts() {
             const profile_pic = document.createElement("div");
             profile_pic.classList.add("Chat_picture");
             const profile_image = document.createElement("img");
+            fetch('/profile_picture', {
+                method: 'POST',
+                body: JSON.stringify({
+                    username: contacts[contact].company
+                })
+            })
+            .then(response => response.json())
+            .then(url =>{
+                profile_image.src = url.image_url
+            })
             profile_image.classList.add("Chat_image");
             profile_pic.appendChild(profile_image);
             div.appendChild(profile_pic);

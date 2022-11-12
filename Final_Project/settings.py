@@ -134,4 +134,6 @@ AUTH_USER_MODEL = "Job.User"
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*', 'https://a548-2a02-908-431-720-5f2-a36d-cec5-b267.eu.ngrok.io']
+
+CSRF_TRUSTED_ORIGINS = ['https://a548-2a02-908-431-720-5f2-a36d-cec5-b267.eu.ngrok.io']

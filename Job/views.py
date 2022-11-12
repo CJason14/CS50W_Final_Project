@@ -196,7 +196,9 @@ def settings(request):
 def contacts(request):
     username = request.user.username
     if request.user.is_company:
-        pass
+        contacts = Chat.objects.filter(company = username)
+        for contact in contacts:
+            contact.company = contact.user
     else:
         contacts = Chat.objects.filter(user = username)
     return JsonResponse([contacts_content.serialize() for contacts_content in contacts], safe=False)
@@ -251,6 +253,15 @@ def getprofilepicture(request):
     user = User.objects.filter(username = username)
     return JsonResponse({"image_url": user[0].image.url})
 
+
+@login_required(login_url="/login")
+def new_job(request):
+    if request.user.is_company:
+        if request.user.language == "English":
+            language = English.objects.all()
+        else:
+            language = German.objects.all()
+        return render(request, "new_job.html", {"language": language})
 
 def deleteimages():
     users = User.objects.all()
