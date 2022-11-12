@@ -1,3 +1,18 @@
+#Chat{
+    overflow-y: scroll;
+}
+
+.Chat_Messages{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    left: 300px;
+    top: 110px;
+    background-color: white;
+    width: calc(100vw - 300px);
+    height: calc(100vh - 110px);
+}
+
 .Chat_Chats {
     position: fixed;
     left: 0;
@@ -31,8 +46,10 @@
     margin-right: 10px;
     min-width: 50px;
     max-width: 50px;
+    min-height: 50px;
     border-radius: 50%;
     overflow: hidden;
+    background-color: white;
 }
 
 .Chat_User {
@@ -52,17 +69,6 @@
     z-index: 10;
 }
 
-.Chat_Messages{
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    left: 300px;
-    top: 110px;
-    background-color: white;
-    width: calc(100vw - 300px);
-    height: calc(100vh - 110px);
-}
-
 .burger-menu{
     height: 20px;
     width: 20px;
@@ -71,15 +77,45 @@
 
 .writer{
     position: relative;
-    width: 200px;
-    height: 50px;
-    margin-top: 10px;
+    width: 300px;
+    min-height: fit-content;
+    margin-top: 15px;
     margin-right: 5px;
     background-color: green;
     border-radius: 25px;
     border-bottom-right-radius: 2px;
     margin-left: auto;
+    padding: 7px;
+    padding-left: 15px;
 }
+
+.recipient{
+    position: relative;
+    width: 300px;
+    min-height: fit-content;
+    margin-top: 15px;
+    margin-right: 5px;
+    background-color: grey;
+    border-radius: 25px;
+    border-bottom-left-radius: 2px;
+    padding: 7px;
+    padding-left: 15px;
+    margin-left: 5px;
+}
+
+.placeholder{
+    height: 200px;
+}
+
+.userinput{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 60px;
+    background-color: aqua;
+}
+
 
 @media only screen and (max-width: 768px) {
     .Chat_Chats {
@@ -96,5 +132,9 @@
         left: 0;
         height: 100vh;
         width: 100vw;
+    }
+
+    #Chat{
+        margin-top: 35px;
     }
 }

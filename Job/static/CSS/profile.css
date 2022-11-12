@@ -9,7 +9,7 @@
     max-height: 180px;
     border-radius: 50%;
     overflow: hidden;
-    background-color: black;
+    background-color: white;
 }
 
 .profile_content h4 {
@@ -35,6 +35,10 @@
 
 .profile_textarea {
     margin-top: 5px;
+}
+
+#cv_input{
+    color: white !important;
 }
 
 @media (min-width: 768px) {

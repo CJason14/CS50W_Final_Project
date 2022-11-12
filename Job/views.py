@@ -2,7 +2,6 @@ from asyncio.windows_events import NULL
 from cgi import test
 from cmath import log
 from errno import ESTALE
-import imp
 from importlib.resources import path
 from multiprocessing import context
 from turtle import title
@@ -24,8 +23,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import  render
 from django.core.files.storage import FileSystemStorage
 from django.templatetags.static import static
-import os.path
 from os import path
+import schedule
+import time
+
 
 def index(request):
     if request.user.is_authenticated:
@@ -107,26 +108,43 @@ def profile(request):
             description = request.POST["profile_description"]
             User.objects.filter(username = username).update(description = description)
         else:
-            my_file=request.FILES.get('file')
-            current_user = User.objects.filter(username = username)
-            current_image = current_user[0].image
-            fss = FileSystemStorage()
-            file = fss.save(my_file.name, my_file)
-            User.objects.filter(username = username).update(
-                image = my_file
-            )
+            my_file=request.FILES.get('file_profile')
+            cv_file=request.FILES.get('cv')
+            if my_file:
+                fss = FileSystemStorage()
+                fss.save(my_file.name, my_file)
+                User.objects.filter(username = username).update(
+                    image = my_file
+                )
+            if cv_file:
+                fss2 = FileSystemStorage()
+                fss2.location = fss2.base_location + "CV/"
+                fss2.save(cv_file.name, cv_file)
+                User.objects.filter(username = username).update(
+                    cv = cv_file
+                )
+                cv_file = NULL
+
             first_name = request.POST["first_name"]
             last_name = request.POST["last_name"]
             email = request.POST["email"]
             phone_number = request.POST["phone_number"]
             if not request.user.date_of_birth:
                 date_of_birth = request.POST["date_of_birth"]
-                User.objects.filter(username = username).update(
-                        first_name = first_name,
-                        last_name = last_name,
-                        email = email,
-                        phone_number = phone_number,
-                        date_of_birth = date_of_birth
+                if date_of_birth:
+                    User.objects.filter(username = username).update(
+                            first_name = first_name,
+                            last_name = last_name,
+                            email = email,
+                            phone_number = phone_number,
+                            date_of_birth = date_of_birth
+                        )
+                else:
+                    User.objects.filter(username = username).update(
+                    first_name = first_name,
+                    last_name = last_name,
+                    email = email,
+                    phone_number = phone_number
                     )
             else:
                 User.objects.filter(username = username).update(
@@ -146,16 +164,6 @@ def profile(request):
         "language": language
     }
     return render(request, "profile.html", userinformation)
-
-
-@login_required(login_url="/login")
-def chat(request):
-    if request.user.language == "English":
-        language = English.objects.all()
-    else:
-        language = German.objects.all()
-    return render(request, "chat.html", {"language": language})
-
 
 def jobs(request):
     jobs = Job.objects.all()
@@ -184,12 +192,67 @@ def settings(request):
         return JsonResponse({"changes": "worked"})
     return render(request, "settings.html", {"language": language})
 
+@login_required(login_url="/login")
+def contacts(request):
+    username = request.user.username
+    if request.user.is_company:
+        pass
+    else:
+        contacts = Chat.objects.filter(user = username)
+    return JsonResponse([contacts_content.serialize() for contacts_content in contacts], safe=False)
+
+
+@login_required(login_url="/login")
+def chat(request):
+    if request.user.language == "English":
+        language = English.objects.all()
+    else:
+        language = German.objects.all()
+    return render(request, "chat.html", {"language": language})
+
 
 @login_required(login_url="/login")
 @csrf_exempt
 def messages(request):
     data = json.loads(request.body)
     recipient = data.get("recipient")
-    username = request.user.username
-    messages = Chat.objects.order_by("-timestamp").filter(writer = username, recipient = recipient)
+    if request.user.is_company:
+        username = request.user.username
+        chat_id = Chat.objects.filter(user = recipient, company = username)
+        if not chat_id[0].chat_id:
+            Chat.objects.create(
+                user = username,
+                company = recipient
+            )
+        messages = Messages.objects.order_by("timestamp").filter(chat_id = chat_id[0].chat_id)
+        for message in messages:
+            print(message.user)
+            if message.user:
+                message.user = False
+            else:
+                message.user = True
+            print(message.user)
+    else:
+        username = request.user.username
+        chat_id = Chat.objects.filter(user = username, company = recipient)
+        if not chat_id[0].chat_id:
+            Chat.objects.create(
+                user = username,
+                company = recipient
+            )
+        messages = Messages.objects.order_by("timestamp").filter(chat_id = chat_id[0].chat_id)
     return JsonResponse([post_content.serialize() for post_content in messages], safe=False)
+
+@login_required(login_url="/login")
+@csrf_exempt
+def getprofilepicture(request):
+    data = json.loads(request.body)
+    username = data["username"]
+    user = User.objects.filter(username = username)
+    return JsonResponse({"image_url": user[0].image.url})
+
+
+def deleteimages():
+    users = User.objects.all()
+    for user in users:
+        print(user.image)

@@ -20,7 +20,7 @@ class User(AbstractUser):
     password = models.CharField(max_length=300)
     phone_number = models.CharField(max_length=50, blank=True, null=True)
     date_of_birth = models.DateTimeField(blank=True, null=True)
-    cv = models.ImageField(upload_to='images', blank=True, null=True)
+    cv = models.ImageField(upload_to='images/CV', blank=True, null=True)
     is_company = models.BooleanField(default = False)
     description = models.CharField(max_length=1000, blank=True, null=True)
     image = models.ImageField(upload_to='images', blank=True)
@@ -44,17 +44,27 @@ class Job(models.Model):
         }
 
 class Chat(models.Model):
+    chat_id = models.AutoField(primary_key=True)
+    company = models.CharField(max_length=200)
+    user = models.CharField(max_length=200)
+
+    def serialize(self):
+        return {
+            "user": self.user,
+            "company": self.company
+        }
+
+class Messages(models.Model):
     id = models.AutoField(primary_key=True)
+    chat_id = models.CharField(max_length=200)
     context = models.CharField(max_length=1000)
-    writer = models.CharField(max_length=200)
-    recipient = models.CharField(max_length=200)
+    user = models.BooleanField(default=False)
     timestamp = models.DateTimeField(default=now)
 
     def serialize(self):
         return {
             "context": self.context,
-            "writer": self.writer,
-            "recipient": self.recipient,
+            "user": self.user
         }
 
 

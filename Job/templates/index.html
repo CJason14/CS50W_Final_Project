@@ -17,10 +17,10 @@
 {% endblock %}
 
 {% block script %}
-{% if user.language == "English" %}
-<script src="{% static 'JS/jobs.js' %}"></script>
-{% else %}
+{% if user.language == "German" %}
 <script src="{% static 'JS/JS_german/jobs.js' %}"></script>
+{% else %}
+<script src="{% static 'JS/jobs.js' %}"></script>
 {% endif %}
 <link href="{% static 'CSS/homepage.css' %}" rel="stylesheet">
 {% endblock %}

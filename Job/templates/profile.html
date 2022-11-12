@@ -39,7 +39,7 @@
             <div class="input_image_container">
                 <img class="input_image_file" src="{% static 'images/Upload_Image.png' %}"
                     style="background-color: white; border-radius: 8px;">
-                <input type="file" accept="image/*" class="input_image" onchange="loadFile(event)" name="file">
+                <input type="file" accept="image/*" class="input_image" onchange="loadFile(event)" name="file_profile">
             </div>
             <script>
                 var loadFile = function (event) {
@@ -79,6 +79,22 @@
             <input name="date_of_birth" class="profile_input" type="date">
             {% endif %}
             <br>
+            <br>
+            <h4>{{ language.12.translation }}:</h4>
+            <div id="cv_input">
+                {{ user.cv }}
+                <br>
+                <input type="file" accept="application/pdf,application/vnd.ms-excel" name="cv">
+            </div>
+            <script>
+                var loadcv = function (event) {
+                    const div = document.getElementById("cv_input");
+                    const p = document.createElement("p");
+                    const p_content = document.createTextNode(event.target.files[0]["name"]);
+                    p.appendChild(p_content);
+                    div.appendChild(p);
+                };
+            </script>
             <br>
             <div class="right">
                 <input type="submit" value="Save" class="button light">

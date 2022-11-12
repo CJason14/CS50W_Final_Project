@@ -3,28 +3,31 @@
 
 {% block body %}
 <div id="C_Chat">
-    <div class="Chat_Chats dark">
+    <div class="Chat_Chats dark" id="Contacts">
         <p class="center">{{ language.5.translation }} <strong>{{ user.username }}</strong></p>
-        <hr>
-        <div class="Chat_User" onclick="loadchat('Username')">
-            <div class="Chat_picture">
-                <img class="Chat_image" src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'images/profile_picture.jpg' %}{% endif %}">
-            </div>
-            <h3>{{ user.username }}</h3>
-        </div>
         <hr>
     </div>
     <div class="Chat_Contact dark" id="Contact">
         <div class="Chat_picture">
-            <img class="Chat_image" src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'images/profile_picture.jpg' %}{% endif %}">
+            <img class="Chat_image" id="Profile_Picture_Contact" src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'images/profile_picture.jpg' %}{% endif %}">
         </div>
         <div>
-            <h3>{{ user.username }}</h3>
+            <h3 id="Chat_Username_Contact">{{ user.username }}</h3>
         </div>
     </div>
-    <div id="Chat" class="Chat_Messages">
+    <div class="Chat_Messages">
+        <div id="Chat">
 
+        </div>
     </div>
+</div>
+<div class="userinput" id="Userinput">
+<textarea id="Input" onkeypress="if(event.keyCode == 13) sendmessage()">
+
+</textarea>
+<button onclick="sendmessage()">
+Send
+</button>
 </div>
 <style>
     h3 {

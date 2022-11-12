@@ -1,14 +1,84 @@
+document.addEventListener('DOMContentLoaded', function () {
+    loadcontacts()
+});
+
+let small = 0;
+let recipient = "";
+
+addEventListener('resize', (event) => {
+    console.log("Resize");
+    var w = window.innerWidth;
+    if (w > 768 && small == 1){
+        window.location.reload();
+    }
+});
+
+function loadcontacts() {
+    fetch('/contacts', {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(contacts => {
+        for (const contact in contacts) {
+            const contact_div = document.getElementById("Contacts");
+            const div = document.createElement("div");
+            div.addEventListener("click", function () {
+                loadchat(contacts[contact].company);
+            });
+            div.classList.add("Chat_User");
+
+            const profile_pic = document.createElement("div");
+            profile_pic.classList.add("Chat_picture");
+            const profile_image = document.createElement("img");
+            profile_image.classList.add("Chat_image");
+            profile_pic.appendChild(profile_image);
+            div.appendChild(profile_pic);
+
+            const username = document.createElement("h3");
+            const username_content = document.createTextNode(contacts[contact].company);
+            username.appendChild(username_content);
+            div.appendChild(username);
+
+            contact_div.appendChild(div);
+            contact_div.appendChild(document.createElement("hr"));
+        }
+    })
+}
+
+
 function loadchat(Username) {
+    recipient = Username;
     var w = window.innerWidth;
     if (w > 768) {
+        const div = document.getElementById('Chat');
+        div.innerHTML = "";
+        fetch('/profile_picture', {
+            method: 'POST',
+            body: JSON.stringify({
+                username: Username
+            })
+        })
+        .then(response => response.json())
+        .then(url =>{
+            console.log(url.image_url);
+            contact(url.image_url, Username)
+        })
+        loadmessages(Username)
+        .then(Username =>{
+            scroll()
+        }
+        )
 
     } else {
+        small = 1;
         clear();
-        contact(0, Username);
-    }
+        contact_mobile(0, Username);
+        loadmessages(Username);
+    }   
 }
 
 function loadmessages(Username) {
+    const chat = document.getElementById("Chat");
     fetch('/messages', {
             method: 'POST',
             body: JSON.stringify({
@@ -17,23 +87,39 @@ function loadmessages(Username) {
         })
         .then(response => response.json())
         .then(messages => {
-            console.log(messages);
             for (const message in messages) {
-                console.log(messages[message].recipient)
-                const chat = document.getElementById("Chat");
                 const message_div = document.createElement("div");
-                if (messages[message].recipient == Username) {
+                const context_p = document.createElement("p");
+                const context = document.createTextNode(messages[message].context);
+                context_p.appendChild(context);
+                message_div.appendChild(context_p);
+                if (messages[message].user == true) {
                     message_div.classList.add("writer");
                 } else {
                     message_div.classList.add("recipient");
                 }
                 chat.appendChild(message_div)
             }
+            const placeholder = document.createElement("div");
+            placeholder.classList.add("placeholder");
+            chat.appendChild(placeholder);
         })
+    return Promise.resolve(Username);
 }
 
+function scroll(){
+    let div = document.getElementById('Chat');
+    setTimeout(() => div.lastElementChild.scrollIntoView({}), 10);
+}
 
 function contact(url, name) {
+    const username = document.getElementById("Chat_Username_Contact");
+    username.innerText = name;
+    const image = document.getElementById("Profile_Picture_Contact");
+    image.src = url;
+}
+
+function contact_mobile(url, name) {
     const contact_div = document.createElement("div");
     contact_div.classList.add("Chat_Contact_Small");
     contact_div.classList.add("dark");
@@ -64,10 +150,17 @@ function contact(url, name) {
 }
 
 function clear() {
-    chat = document.getElementById("C_Chat");
+    const chat = document.getElementById("C_Chat");
     chat.innerHTML = "";
     const Chat = document.createElement("div");
     Chat.id = "Chat";
-    Chat.classList.add("Chat_Messages");
-    chat.appendChild(Chat)
+    const outerChat = document.createElement("div");
+    outerChat.appendChild(Chat);
+    outerChat.classList.add("Chat_Messages");
+    chat.appendChild(outerChat);
+}
+
+function sendmessage() {
+    const Input = document.getElementById("Input");
+    Input.value = null;
 }
