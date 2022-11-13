@@ -59,5 +59,12 @@ Mobile
   - jobs.js -> loads the jobs for the homepage
   - settings.js -> controls the setting and could change them without reload
 
+### How to run:
+  Install all requirements
+  1. python manage.py makemigrations Job
+  2. python manage.py migrate
+  3. python manage.py runserver
+
+
 ## Author
 - [@CJason14](https://github.com/CJason14)
