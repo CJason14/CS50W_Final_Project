@@ -11,7 +11,7 @@ On the Profile Page, you can Upload a Profile Picture and change certain data. I
 
 Settings:
   - Change to Darkmode
-  - Change preffered Language
+  - Change preferred Language
 
 Chats:
   - Apply for Jobs
@@ -47,10 +47,17 @@ Mobile
 ## Files:
 
 ### CSS-Files:
+  - CSS Folder for normal CSS Design
+  - Dark CSS Folder for Custom Dark Mode
+  - Light CSS Folder for Custom White Mode
 
 ### HTML-Files:
 
 ### JS-Files:
+  - applications.js -> loads all applications that a company receives
+  - chat.js -> loads the text messages, posts them and is used for mobile design
+  - jobs.js -> loads the jobs for the homepage
+  - settings.js -> controls the setting and could change them without reload
 
 ## Author
 - [@CJason14](https://github.com/CJason14)
