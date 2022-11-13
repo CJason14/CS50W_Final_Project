@@ -8,7 +8,6 @@ function loadjobs() {
         })
         .then(response => response.json())
         .then(jobs => {
-            console.log(jobs);
             count = 0;
             for (const job in jobs) {
                 const job_div = document.createElement("div");

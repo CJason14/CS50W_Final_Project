@@ -49,10 +49,14 @@ class Application(models.Model):
     user_id = models.CharField(max_length=200)
     job_id = models.CharField(max_length=200)
     application = models.CharField(max_length=200)
+    accepted = models.BooleanField(default = False)
+    declined = models.BooleanField(default = False)
 
     def serialize(self):
         return {
             "username": self.user_id,
+            "accepted": self.accepted,
+            "declined": self.declined
         }
 
 

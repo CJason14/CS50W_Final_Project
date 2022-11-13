@@ -156,3 +156,25 @@ body {
 .big_button h4{
     margin: 0 !important;
 }
+
+.popup{
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(10px);
+    z-index: 120 !important;
+}
+
+.inner_popup{
+    width: 280px;
+    height: 310px;
+    padding-top: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: white;
+}

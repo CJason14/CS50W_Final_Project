@@ -304,3 +304,11 @@ def applications(request):
         else:
             language = German.objects.all()
         return render(request, "applications.html", {"language": language})
+    else:
+        if request.method == "GET":
+            user_id = request.user.id
+            applications = Application.objects.filter(user_id = user_id)
+            for application in applications:
+                if application.accepted == True or application.declined == True:
+                    return JsonResponse(application.serialize(), safe=False)
+            return JsonResponse({"NoResponse": "1"})

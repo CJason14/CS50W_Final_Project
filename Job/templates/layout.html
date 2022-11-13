@@ -20,6 +20,9 @@
     {% if user.darkmode %}
     <link href="{% static 'CSS_dark/style.css' %}" rel="stylesheet">
     {% endif %}
+    {% if not user.is_company %}
+    <script src="{% static 'JS/info.js' %}"></script>
+    {% endif %}
     {% block script %}
     {% endblock %}
 </head>
