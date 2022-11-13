@@ -7,6 +7,8 @@ On the Profile Page, you can Upload a Profile Picture and change certain data. I
 
 ### Distinctiveness and Complexity:
 
+The project uses multiple Models, which are connected for some features. In the frontend most of the stuff is javascript, the chat has almost no HTML and is fully written in JS. The project includes a Profile, a Chat function, different Account types and the main function of applying for Jobs. The company can see the CV and all the personalised Data that you have uploaded. Once the company accepted you, you will get a message in the chat tab. If they declined you you will get info once you loaded the page that you have been declined.
+
 ### Features:
 
 Settings:
@@ -58,6 +60,7 @@ Mobile
   - chat.js -> loads the text messages, posts them and is used for mobile design
   - jobs.js -> loads the jobs for the homepage
   - settings.js -> controls the setting and could change them without reload
+  - info.js -> shows pop-up if you have been accepted or declined for an job
 
 ### How to run:
   Install all requirements
