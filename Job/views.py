@@ -216,34 +216,53 @@ def chat(request):
 @login_required(login_url="/login")
 @csrf_exempt
 def messages(request):
-    data = json.loads(request.body)
-    recipient = data.get("recipient")
-    if request.user.is_company:
+    if request.method == "PUT":
+        data = json.loads(request.body)
         username = request.user.username
-        chat_id = Chat.objects.filter(user = recipient, company = username)
-        if not chat_id[0].chat_id:
-            Chat.objects.create(
-                user = username,
-                company = recipient
+        recipient = data["recipient"]
+        context = data["message"]
+        if request.user.is_company:
+            chat_id = Chat.objects.filter(user = recipient, company = username)
+            Messages.objects.create(
+                chat_id = chat_id[0].chat_id,
+                context = context,
+                user = False
             )
-        messages = Messages.objects.order_by("timestamp").filter(chat_id = chat_id[0].chat_id)
-        for message in messages:
-            print(message.user)
-            if message.user:
-                message.user = False
-            else:
-                message.user = True
-            print(message.user)
+        else:
+            chat_id = Chat.objects.filter(user = username, company = recipient)
+            Messages.objects.create(
+                chat_id = chat_id[0].chat_id,
+                context = context,
+                user = True
+            )
+        return JsonResponse({"Posted": "1"})
     else:
-        username = request.user.username
-        chat_id = Chat.objects.filter(user = username, company = recipient)
-        if not chat_id[0].chat_id:
-            Chat.objects.create(
-                user = username,
-                company = recipient
-            )
-        messages = Messages.objects.order_by("timestamp").filter(chat_id = chat_id[0].chat_id)
-    return JsonResponse([post_content.serialize() for post_content in messages], safe=False)
+        data = json.loads(request.body)
+        recipient = data.get("recipient")
+        if request.user.is_company:
+            username = request.user.username
+            chat_id = Chat.objects.filter(user = recipient, company = username)
+            if not chat_id[0].chat_id:
+                Chat.objects.create(
+                    user = username,
+                    company = recipient
+                )
+            messages = Messages.objects.order_by("timestamp").filter(chat_id = chat_id[0].chat_id)
+            for message in messages:
+                if message.user:
+                    message.user = False
+                else:
+                    message.user = True
+        else:
+            username = request.user.username
+            chat_id = Chat.objects.filter(user = username, company = recipient)
+            if not chat_id[0].chat_id:
+                Chat.objects.create(
+                    user = username,
+                    company = recipient
+                )
+            messages = Messages.objects.order_by("timestamp").filter(chat_id = chat_id[0].chat_id)
+        return JsonResponse([post_content.serialize() for post_content in messages], safe=False)
 
 @login_required(login_url="/login")
 @csrf_exempt
@@ -251,7 +270,9 @@ def getprofilepicture(request):
     data = json.loads(request.body)
     username = data["username"]
     user = User.objects.filter(username = username)
-    return JsonResponse({"image_url": user[0].image.url})
+    if user[0].image:
+        return JsonResponse({"image_url": user[0].image.url})
+    return JsonResponse({"image_url": "static/images/profile_picture.jpg"})
 
 
 @login_required(login_url="/login")
@@ -266,4 +287,4 @@ def new_job(request):
 def deleteimages():
     users = User.objects.all()
     for user in users:
-        print(user.image)
+        pass

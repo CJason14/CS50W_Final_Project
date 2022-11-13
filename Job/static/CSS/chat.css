@@ -1,5 +1,6 @@
 #Chat{
     overflow-y: scroll;
+    padding-bottom: 200px;
 }
 
 .Chat_Messages{
@@ -112,9 +113,23 @@
     left: 0;
     width: 100vw;
     height: 60px;
-    background-color: aqua;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
 }
 
+.textare_input{
+    border-radius: 10px;
+    resize: none;
+    border: none;
+
+}
+
+.textare_input:focus{
+    outline: 0;
+}
 
 @media only screen and (max-width: 768px) {
     .Chat_Chats {

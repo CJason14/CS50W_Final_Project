@@ -6,7 +6,6 @@ let small = 0;
 let recipient = "";
 
 addEventListener('resize', (event) => {
-    console.log("Resize");
     var w = window.innerWidth;
     if (w > 768 && small == 1){
         window.location.reload();
@@ -70,7 +69,6 @@ function loadchat(Username) {
         })
         .then(response => response.json())
         .then(url =>{
-            console.log(url.image_url);
             contact(url.image_url, Username)
         })
         loadmessages(Username)
@@ -82,8 +80,21 @@ function loadchat(Username) {
     } else {
         small = 1;
         clear();
-        contact_mobile(0, Username);
-        loadmessages(Username);
+        fetch('/profile_picture', {
+            method: 'POST',
+            body: JSON.stringify({
+                username: Username
+            })
+        })
+        .then(response => response.json())
+        .then(url =>{
+            contact_mobile(url.image_url, Username);
+        })
+        loadmessages(Username)
+        .then(Username =>{
+            scroll()
+        }
+        )
     }   
 }
 
@@ -110,9 +121,6 @@ function loadmessages(Username) {
                 }
                 chat.appendChild(message_div)
             }
-            const placeholder = document.createElement("div");
-            placeholder.classList.add("placeholder");
-            chat.appendChild(placeholder);
         })
     return Promise.resolve(Username);
 }
@@ -135,7 +143,10 @@ function contact_mobile(url, name) {
     contact_div.classList.add("dark");
 
     const burger_menu = document.createElement("div");
-    burger_menu.classList.add("burger-menu")
+    burger_menu.classList.add("burger-menu");
+    burger_menu.addEventListener("click", function () {
+        window.location.reload();
+    })
     contact_div.appendChild(burger_menu);
 
     const profile_div = document.createElement("div");
@@ -172,5 +183,24 @@ function clear() {
 
 function sendmessage() {
     const Input = document.getElementById("Input");
-    Input.value = null;
+    fetch("/messages", {
+        method: 'PUT',
+        body: JSON.stringify({
+            message: Input.value,
+            recipient: recipient
+        })
+    })
+    .then(response => response.json())
+    .then(result => {
+        const chat = document.getElementById("Chat");
+        const message_div = document.createElement("div");
+        const context_p = document.createElement("p");
+        const context = document.createTextNode(Input.value);
+        context_p.appendChild(context);
+        message_div.appendChild(context_p);
+        message_div.classList.add("writer");
+        chat.appendChild(message_div)
+        Input.value = null;
+        scroll();
+    });
 }

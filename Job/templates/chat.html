@@ -22,11 +22,9 @@
     </div>
 </div>
 <div class="userinput" id="Userinput">
-<textarea id="Input" onkeypress="if(event.keyCode == 13) sendmessage()">
-
-</textarea>
-<button onclick="sendmessage()">
-Send
+<textarea class="textare_input" id="Input" onkeypress="if(event.keyCode == 13) sendmessage()"></textarea>
+<button onclick="sendmessage()" class="button">
+    {{ language.14.translation }}
 </button>
 </div>
 <style>
