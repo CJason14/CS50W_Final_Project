@@ -188,7 +188,7 @@ def settings(request):
             if data["Language"] == "English":
                 User.objects.filter(username = username).update(language = "English")
             if data["Language"] == "Deutsch":
-                User.objects.filter(username = username).update(language = "German")
+                User.objects.filter(username = username).update(language = "Deutsch")
         return JsonResponse({"changes": "worked"})
     return render(request, "settings.html", {"language": language})
 
@@ -288,3 +288,19 @@ def deleteimages():
     users = User.objects.all()
     for user in users:
         pass
+    
+@login_required(login_url="/login")
+@csrf_exempt
+def applications(request):
+    if request.user.is_company:
+        if request.method == "PUT":
+            applications = Application.objects.filter(company_name = request.user.username)
+            for application in applications:
+                username = User.objects.filter(id = application.user_id)
+                application.user_id =  username[0].username
+            return JsonResponse([application.serialize() for application in applications], safe=False)
+        if request.user.language == "English":
+            language = English.objects.all()
+        else:
+            language = German.objects.all()
+        return render(request, "applications.html", {"language": language})

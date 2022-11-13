@@ -1,15 +1,5 @@
-.profile_image {
-    width: 180px;
-}
-
-.profile_picture {
-    min-width: 180px;
-    max-width: 180px;
-    min-height: 180px;
-    max-height: 180px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: white;
+.big_button h4{
+    margin: 0 !important;
 }
 
 .profile_content h4 {

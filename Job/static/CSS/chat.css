@@ -1,6 +1,7 @@
 #Chat{
     overflow-y: scroll;
     padding-bottom: 200px;
+    color: white !important;
 }
 
 .Chat_Messages{
@@ -68,6 +69,7 @@
     align-items: center;
     padding-left: 10px;
     z-index: 10;
+    background-color: #f8f9fa;
 }
 
 .burger-menu{

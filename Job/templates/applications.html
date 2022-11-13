@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="center" id="Full_Application">
+    <br>
+    <h2><strong>{{ language.15.translation }}</strong></h2>
+    <br>
+    <div class="job" id="Applications">
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<link href="{% static 'CSS/chat.css' %}" rel="stylesheet">
+<script src="{% static 'JS/applications.js' %}"></script>
+{% if user.darkmode %}
+<link href="{% static 'CSS_dark/chat.css' %}" rel="stylesheet">
+{% endif %}
+{% endblock %}
+
+{% block title %}
+{{ language.15.translation }}
+{% endblock %}

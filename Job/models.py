@@ -43,6 +43,20 @@ class Job(models.Model):
             "category": self.category
         }
 
+class Application(models.Model):
+    id = models.AutoField(primary_key=True)
+    company_name = models.CharField(max_length=200)
+    user_id = models.CharField(max_length=200)
+    job_id = models.CharField(max_length=200)
+    application = models.CharField(max_length=200)
+
+    def serialize(self):
+        return {
+            "username": self.user_id,
+        }
+
+
+
 class Chat(models.Model):
     chat_id = models.AutoField(primary_key=True)
     company = models.CharField(max_length=200)

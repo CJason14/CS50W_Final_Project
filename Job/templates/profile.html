@@ -6,14 +6,23 @@
 <div class="center">
     {% if user.is_company %}
     <br>
-    <h1><b>Company</b></h1>
+    <h1><b>{{ language.17.translation }}</b></h1>
     <br>
     <h2>{{ user.username }}</h2>
+    <br>
+    <div class="big_button_outer">
+        <div class="big_button">
+            <a class="nav-link" href="{% url 'applications' %}">{{ language.15.translation }}</a>
+        </div>
+        <div class="big_button">
+            <a class="nav-link" href="{% url 'new_job' %}">{{ language.4.translation }}</a>
+        </div>
+    </div>
     <div class="profile_content">
         <div class="center">
             <div>
                 <form method="POST" action="{% url 'profile' %}">
-                    <h4>Description:</h4>
+                    <h4>{{ language.16.translation }}:</h4>
                     {% csrf_token %}
                     <textarea name="profile_description" class="profile_textarea"
                         style="resize: none;">{{ user.description }}</textarea>
@@ -106,12 +115,9 @@
 {% endblock %}
 
 {% block script %}
-{% if user.is_company %}
-<script src="{% static 'JS/jobs.js' %}"></script>
-{% endif %}
 <link href="{% static 'CSS/profile.css' %}" rel="stylesheet">
 {% endblock %}
 
-{% block title %} 
-    Profile
+{% block title %}
+Profile
 {% endblock %}
