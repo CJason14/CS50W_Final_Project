@@ -49,6 +49,7 @@
     min-width: 50px;
     max-width: 50px;
     min-height: 50px;
+    max-height: 50px;
     border-radius: 50%;
     overflow: hidden;
     background-color: white;
@@ -73,9 +74,8 @@
 }
 
 .burger-menu{
-    height: 20px;
-    width: 20px;
-    background-color: white;
+    color: white;
+    font-size: 25px;
 }
 
 .writer{

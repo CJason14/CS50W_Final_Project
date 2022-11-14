@@ -143,6 +143,8 @@ function contact_mobile(url, name) {
     contact_div.classList.add("dark");
 
     const burger_menu = document.createElement("div");
+    const content = document.createTextNode("<<");
+    burger_menu.appendChild(content)
     burger_menu.classList.add("burger-menu");
     burger_menu.addEventListener("click", function () {
         window.location.reload();

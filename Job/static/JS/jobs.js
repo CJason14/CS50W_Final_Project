@@ -48,8 +48,8 @@ function loadjobs() {
                     fetch('/apply', {
                         method: 'POST',
                         body: JSON.stringify({
-                            company: jobs[count].company_key,
-                            id: jobs[count].id
+                            company: jobs[job].company_key,
+                            id: jobs[job].id
                         })
                     })
                     .then(response => response.json())
