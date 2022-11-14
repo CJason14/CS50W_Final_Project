@@ -167,7 +167,13 @@ def profile(request):
 
 def jobs(request):
     jobs = Job.objects.all()
-    return JsonResponse([Job.serialize() for Job in jobs], safe=False)
+    applications = Application.objects.filter(user_id = request.user.username)
+    job_list = list(jobs)
+    for job in jobs:
+        for application in applications:
+            if job.id == int(application.job_id):
+                job_list.remove(job)
+    return JsonResponse([Job.serialize() for Job in job_list], safe=False)
 
 @login_required(login_url="/login")
 @csrf_exempt
@@ -345,3 +351,20 @@ def applications_form(request):
                 declined = True
             )
         return JsonResponse({"Updated": "1"})
+
+@login_required(login_url="/login")
+@csrf_exempt
+def apply(request):
+    if not request.user.is_company:
+        data = json.loads(request.body)
+        company_name = data["company"]
+        job_id = data["id"]
+        username = request.user.username
+        Application.objects.create(
+            company_name = company_name,
+            job_id = job_id,
+            user_id = username
+        )
+        return JsonResponse({"Applied": "1"})
+    else:
+        return JsonResponse({"NoResponse": "1"})

@@ -9,18 +9,6 @@ function loadapplications() {
     })
     .then(response => response.json())
     .then(applications => {
-        if (applications == "") {
-            const main = document.getElementById("Applications");
-
-            const div = document.createElement("div");
-            div.classList.add("center");
-            const h4 = document.createElement("h4");
-            const h4_content = document.createTextNode("No new applications!");
-            h4.appendChild(h4_content);
-            div.appendChild(h4);
-
-            main.appendChild(div);
-        }
         for (const application in applications) {
             if (applications[application].visible){
                 count ++;

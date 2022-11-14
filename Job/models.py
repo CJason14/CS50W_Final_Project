@@ -49,7 +49,9 @@ class Job(models.Model):
             "title": self.title,
             "description": self.description,
             "salary": self.salary,
-            "category": self.category
+            "category": self.category,
+            "company_key": self.company_key,
+            "id": self.id
         }
 
 class Application(models.Model):
@@ -57,7 +59,6 @@ class Application(models.Model):
     company_name = models.CharField(max_length=200)
     user_id = models.CharField(max_length=200)
     job_id = models.CharField(max_length=200)
-    application = models.CharField(max_length=200)
     accepted = models.BooleanField(default = False)
     declined = models.BooleanField(default = False)
     visible = models.BooleanField(default= True)

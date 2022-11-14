@@ -22,5 +22,6 @@ urlpatterns = [
     path("new_job", views.new_job, name="new_job"),
     path("applications", views.applications, name="applications"),
     path("application_answer", views.applications_form, name="application_answer"),
-    path("getuserdata", views.getuserdata, name="getuserdata")
+    path("getuserdata", views.getuserdata, name="getuserdata"),
+    path("apply", views.apply, name="apply")
 ]

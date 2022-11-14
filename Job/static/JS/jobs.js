@@ -13,7 +13,6 @@ function loadjobs() {
                 const job_div = document.createElement("div");
                 job_div.classList.add('job');
                 let clicked = 0;
-
                 const title = document.createElement("h3");
                 const title_content = document.createTextNode(jobs[count].title);
                 title.appendChild(title_content);
@@ -30,7 +29,7 @@ function loadjobs() {
                 job_div.appendChild(category);
 
                 const company = document.createElement("h6");
-                const company_content = document.createTextNode("Company: ");
+                const company_content = document.createTextNode("Company: " + jobs[count].company_key);
                 company.appendChild(company_content);
                 job_div.appendChild(company);
 
@@ -45,6 +44,19 @@ function loadjobs() {
                 apply_div.classList.add("right");
                 const apply = document.createElement("button");
                 const content = document.createTextNode("Apply");
+                apply.addEventListener("click", function () {
+                    fetch('/apply', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            company: jobs[count].company_key,
+                            id: jobs[count].id
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(url =>{
+                        window.location.reload()
+                    })
+                });
                 apply.appendChild(content);
                 apply.classList.add("button");
                 apply.classList.add("light");
