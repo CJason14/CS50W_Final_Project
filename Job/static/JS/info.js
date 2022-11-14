@@ -19,12 +19,29 @@ function checkjobs() {
             innerdiv.classList.add("inner_popup");
 
             const h = document.createElement("h2");
-            const h_content = document.createTextNode("Job_Name");
+            const h_content = document.createTextNode(jobs.username);
             h.appendChild(h_content);
             const h_div = document.createElement("div");
             h_div.classList.add("center");
             h_div.appendChild(h);
             innerdiv.appendChild(h_div);
+
+            const text_div = document.createElement("div");
+            text_div.classList.add("center");
+            text_div.classList.add("popup_space");
+            const text = document.createElement("h4");
+            if (jobs.accepted == true){
+                const accepted = document.createTextNode("You got accepted!");
+                text.appendChild(accepted);
+                text.style.setProperty('color', 'Green', 'important');
+            }
+            else{
+                const declined = document.createTextNode("You got declined!");
+                text.appendChild(declined);
+                text.style.setProperty('color', 'Red', 'important');
+            }
+            text_div.appendChild(text);
+            innerdiv.appendChild(text_div);
 
             
 
@@ -35,7 +52,17 @@ function checkjobs() {
             button.classList.add("light");
             button.textContent = "Close";
             button.addEventListener("click", function () {
-                outer_div.innerHTML = "";
+                fetch('/applications', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        id: jobs.id
+                    })
+                })
+                .then(response => response.json())
+                .then(url =>{
+                    console.log(url)
+                    outer_div.innerHTML = "";
+                })
             })
             button_div.appendChild(button);
             innerdiv.appendChild(button_div);

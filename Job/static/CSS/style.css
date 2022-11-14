@@ -172,9 +172,14 @@ body {
 
 .inner_popup{
     width: 280px;
-    height: 310px;
+    height: 270px;
     padding-top: 20px;
     padding: 10px;
     border-radius: 20px;
     background-color: white;
+}
+
+.popup_space{
+    margin-top: 55px;
+    margin-bottom: 60px;
 }

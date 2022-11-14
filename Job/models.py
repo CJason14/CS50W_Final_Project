@@ -27,6 +27,15 @@ class User(AbstractUser):
     darkmode = models.BooleanField(default = False)
     language = models.CharField(default = "English", max_length=300)
 
+    def serialize(self):
+        return {
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "cv": self.cv.name,
+            "email": self.email,
+            "phone_number": self.phone_number
+        }
+
 class Job(models.Model):
     id = models.AutoField(primary_key=True)
     company_key= models.CharField(max_length=200)
@@ -51,12 +60,15 @@ class Application(models.Model):
     application = models.CharField(max_length=200)
     accepted = models.BooleanField(default = False)
     declined = models.BooleanField(default = False)
+    visible = models.BooleanField(default= True)
 
     def serialize(self):
         return {
             "username": self.user_id,
             "accepted": self.accepted,
-            "declined": self.declined
+            "declined": self.declined,
+            "id": self.id,
+            "visible": self.visible
         }
 
 

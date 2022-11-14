@@ -274,6 +274,15 @@ def getprofilepicture(request):
         return JsonResponse({"image_url": user[0].image.url})
     return JsonResponse({"image_url": "static/images/profile_picture.jpg"})
 
+@login_required(login_url="/login")
+@csrf_exempt
+def getuserdata(request):
+    if request.user.is_company:
+        if request.method == "POST":
+            data  = json.loads(request.body)
+            user = User.objects.filter(username = data["username"]).first()
+            return JsonResponse(user.serialize())
+
 
 @login_required(login_url="/login")
 def new_job(request):
@@ -295,9 +304,6 @@ def applications(request):
     if request.user.is_company:
         if request.method == "PUT":
             applications = Application.objects.filter(company_name = request.user.username)
-            for application in applications:
-                username = User.objects.filter(id = application.user_id)
-                application.user_id =  username[0].username
             return JsonResponse([application.serialize() for application in applications], safe=False)
         if request.user.language == "English":
             language = English.objects.all()
@@ -305,10 +311,37 @@ def applications(request):
             language = German.objects.all()
         return render(request, "applications.html", {"language": language})
     else:
+        user_id = request.user.username
         if request.method == "GET":
-            user_id = request.user.id
             applications = Application.objects.filter(user_id = user_id)
             for application in applications:
                 if application.accepted == True or application.declined == True:
+                    application_name = Job.objects.filter(id = application.job_id).first()
+                    application.user_id = application_name.title 
                     return JsonResponse(application.serialize(), safe=False)
             return JsonResponse({"NoResponse": "1"})
+        if request.method == "POST":
+            data = json.loads(request.body)
+            id = data.get("id")
+            Application.objects.filter(user_id = user_id, id = id).delete()
+            return JsonResponse({"Deleted": "1"})
+
+
+@login_required(login_url="/login")
+@csrf_exempt
+def applications_form(request):
+    if request.user.is_company:
+        data = json.loads(request.body)
+        username = data["username"]
+        id = data["id"]
+        if data["accepted"]:
+            Application.objects.filter(user_id = username, company_name = request.user.username, id = id).update(
+                visible = False,
+                accepted = True
+            )
+        else:
+            Application.objects.filter(user_id = username, company_name = request.user.username, id = id).update(
+                visible = False,
+                declined = True
+            )
+        return JsonResponse({"Updated": "1"})
