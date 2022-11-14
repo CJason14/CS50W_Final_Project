@@ -63,11 +63,11 @@ Mobile
   - info.js -> shows pop-up if you have been accepted or declined for an job
 
 ### How to run:
-  !! The database is needed for the translation !!
-  Install all requirements
-  1. python manage.py makemigrations Job
-  2. python manage.py migrate
-  3. python manage.py runserver
+  1. !! The database is needed for the translation !!
+  2. Install all requirements
+  3. python manage.py makemigrations Job
+  4. python manage.py migrate
+  5. python manage.py runserver
 
 
 ## Author
