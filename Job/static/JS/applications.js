@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function loadapplications() {
+    let count = 0;
     fetch('/applications', {
         method: 'PUT'
     })
@@ -22,6 +23,7 @@ function loadapplications() {
         }
         for (const application in applications) {
             if (applications[application].visible){
+                count ++;
                 const main = document.getElementById("Applications");
 
                 const div = document.createElement("div");
@@ -58,6 +60,18 @@ function loadapplications() {
     
                 main.appendChild(div);
             }
+        }
+        if (count == 0) {
+            const main = document.getElementById("Applications");
+
+            const div = document.createElement("div");
+            div.classList.add("center");
+            const h4 = document.createElement("h4");
+            const h4_content = document.createTextNode("No new applications!");
+            h4.appendChild(h4_content);
+            div.appendChild(h4);
+
+            main.appendChild(div);
         }
     })
 }
