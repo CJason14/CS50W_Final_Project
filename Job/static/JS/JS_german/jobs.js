@@ -13,23 +13,24 @@ function loadjobs() {
                 const job_div = document.createElement("div");
                 job_div.classList.add('job');
                 let clicked = 0;
+
                 const title = document.createElement("h3");
                 const title_content = document.createTextNode(jobs[count].title);
                 title.appendChild(title_content);
                 job_div.appendChild(title);
 
                 const salary = document.createElement("h6");
-                const salary_content = document.createTextNode("Salary: " + jobs[count].salary + "$");
+                const salary_content = document.createTextNode("Gehalt: " + jobs[count].salary + "$");
                 salary.appendChild(salary_content);
                 job_div.appendChild(salary);
 
                 const category = document.createElement("h6");
-                const category_content = document.createTextNode("Category: " + jobs[count].category);
+                const category_content = document.createTextNode("Kategorie: " + jobs[count].category);
                 category.appendChild(category_content);
                 job_div.appendChild(category);
 
                 const company = document.createElement("h6");
-                const company_content = document.createTextNode("Company: " + jobs[count].company_key);
+                const company_content = document.createTextNode("Unternehmen: " + jobs[count].company_key);
                 company.appendChild(company_content);
                 job_div.appendChild(company);
 
@@ -39,17 +40,17 @@ function loadjobs() {
                 const description_content = document.createTextNode(jobs[count].description);
                 description.appendChild(description_content);
                 job_div.appendChild(description);
-
+                console.log(jobs[job])
                 const apply_div = document.createElement("div");
                 apply_div.classList.add("right");
                 const apply = document.createElement("button");
-                const content = document.createTextNode("Apply");
+                const content = document.createTextNode("Bewerben");
                 apply.addEventListener("click", function () {
                     fetch('/apply', {
                         method: 'POST',
                         body: JSON.stringify({
-                            company: jobs[count].company_key,
-                            id: jobs[count].id
+                            company: jobs[job].company_key,
+                            id: jobs[job].id
                         })
                     })
                     .then(response => response.json())

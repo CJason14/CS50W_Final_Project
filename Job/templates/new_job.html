@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="center">
+    <br>
+    <h2><strong>{{ language.4.translation }}</strong></h2>
+    <br>
+    <form class="job" action="{% url 'new_job' %}" method="post">
+        {% csrf_token %}
+        <h4>{{ language.18.translation }}:</h4>
+        <input name="title" class="profile_input" type="text">
+        <br><br>
+        <h4>{{ language.19.translation }}:</h4>
+        <textarea name="description" class="profile_input" style="resize: none;"></textarea>
+        <br><br>
+        <h4>{{ language.20.translation }}:</h4>
+        <input name="salary" class="profile_input" type="number">
+        <br><br>
+        <h4>{{ language.21.translation }}:</h4>
+        <select name="category" class="profile_input" type="text">
+        <option value="Remote">Remote</option>
+        <option value="Local">Local</option>
+        </select>
+        <br>
+        <br>
+        <div class="right">
+            <input type="submit" value="{{ language.13.translation }}" class="button light">
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block title %}
+New Job
+{% endblock %}

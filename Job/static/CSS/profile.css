@@ -1,15 +1,5 @@
-.profile_image {
-    width: 180px;
-}
-
-.profile_picture {
-    min-width: 180px;
-    max-width: 180px;
-    min-height: 180px;
-    max-height: 180px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: black;
+.big_button h4{
+    margin: 0 !important;
 }
 
 .profile_content h4 {
@@ -35,6 +25,10 @@
 
 .profile_textarea {
     margin-top: 5px;
+}
+
+#cv_input{
+    color: white !important;
 }
 
 @media (min-width: 768px) {

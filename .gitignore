@@ -1,2 +1,6 @@
 /db.sqlite3
 /Final_Project/settings.py
+/media
+/Final_Project/__pycache__
+/Job/__pycache__
+/Job/migrations

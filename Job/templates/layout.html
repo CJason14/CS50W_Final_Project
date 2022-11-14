@@ -1,11 +1,17 @@
 {% load static %}
 
 <!DOCTYPE html>
+{% if user.language == "English" %}
 <html lang="en">
+{% else %}
+<html lang="de">
+{% endif %}
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Job: {% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -13,6 +19,9 @@
     <link href="{% static 'CSS/style.css' %}" rel="stylesheet">
     {% if user.darkmode %}
     <link href="{% static 'CSS_dark/style.css' %}" rel="stylesheet">
+    {% endif %}
+    {% if not user.is_company %}
+    <script src="{% static 'JS/info.js' %}"></script>
     {% endif %}
     {% block script %}
     {% endblock %}
@@ -37,11 +46,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'settings' %}">{{ language.1.translation }}</a>
                     </li>
-                    {% if user.is_company %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="">{{ language.4.translation }}</a>
-                    </li>
-                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">{{ language.2.translation }}</a>
                     </li>

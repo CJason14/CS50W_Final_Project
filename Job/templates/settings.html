@@ -3,10 +3,12 @@
 
 {% block body %}
 <div class="center">
+    <br>
+    <h2><strong>{{ language.1.translation }}</strong></h2>
     <div class="job">
         <div class="switch-holder">
             <div class="switch-label">
-                <i class="fa fa-wifi"></i><span>Darkmode</span>
+                <i class="fa fa-wifi"></i><span><strong>Darkmode</strong></span>
             </div>
             <div class="switch-toggle">
                 <input type="checkbox" id="Darkmode" onclick="Darkmode()" {% if user.darkmode %} checked {% endif %}>
@@ -15,13 +17,13 @@
         </div>
         <div class="switch-holder">
             <div class="switch-label">
-                <i class="fa fa-wifi"></i><span>Language</span>
+                <i class="fa fa-wifi"></i><span><strong>{{ language.6.translation }}</strong></span>
             </div>
             <div class="switch-toggle select">
-                <select class="dark" onselect="Language()">
-                    <option class="dark" value="">Please choose an option</option>
-                    <option class="dark" value="english">English</option>
-                    <option class="dark" value="german">Deutsch</option>
+                <select id="Language_List" class="dark" onchange="Language()">
+                    <option class="dark" value="">{{ user.language }}</option>
+                    <option class="dark" value="English">English</option>
+                    <option class="dark" value="Deutsch">Deutsch</option>
                 </select>
             </div>
         </div>
@@ -46,5 +48,5 @@
 {% endblock %}
 
 {% block title %} 
-    Settings
+    {{ language.1.translation }}
 {% endblock %}

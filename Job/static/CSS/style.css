@@ -4,14 +4,6 @@ body {
     overflow-x: hidden;
 }
 
-.dark{
-    color: black !important;
-}
-
-.light{
-    color: white !important;
-}
-
 .top {
     z-index: 10;
 }
@@ -26,10 +18,9 @@ body {
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     width: 600px;
-    height: 300px;
+    height: fit-content;
     position: relative;
     margin-top: 20px;
-    transition: all 0.5s linear;
     z-index: 100 !important;
 }
 
@@ -102,4 +93,93 @@ body {
     position: relative;
     width: 50px;
     height: 50px;
+}
+
+.application_design {
+    background-color: rgba(109, 109, 109, 0.575);
+    display: flex;
+    padding: 8px 0px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.application_picture {
+    margin-right: 10px;
+    min-width: 50px;
+    max-width: 50px;
+    min-height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+}
+
+.application_name h3{
+    margin: 0;
+}
+
+.profile_image {
+    width: 180px;
+}
+
+.profile_picture {
+    min-width: 180px;
+    max-width: 180px;
+    min-height: 180px;
+    max-height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+}
+
+.big_button_outer{
+    display: flex;
+    gap: 1vw;
+    margin-bottom: 20px;
+}
+
+.big_button {
+    background-color: rgba(0, 0, 0, 0.17);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 44vw;
+    max-width: 290px;
+    height: 50px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.big_button h4{
+    margin: 0 !important;
+}
+
+.popup{
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(10px);
+    z-index: 120 !important;
+}
+
+.inner_popup{
+    width: 280px;
+    height: 270px;
+    padding-top: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.popup_space{
+    margin-top: 55px;
+    margin-bottom: 60px;
 }

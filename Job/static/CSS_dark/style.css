@@ -10,8 +10,16 @@ body{
     background-color: #121212;
 }
 
+.dark{
+    color: black !important;
+}
+
 .light{
-    color: white;
+    color: white !important;
+}
+
+.big_button{
+    background-color: #1F1B24 !important;
 }
 
 .job{
@@ -20,4 +28,16 @@ body{
 
 .profile_content{
     background-color: #1F1B24 !important;
+}
+
+.dark_background{
+    background-color: #121212 !important;
+}
+
+.userinput{
+    background-color: #1F1B24 !important;
+}
+
+.inner_popup{
+    background-color: #3a3242 !important;
 }
