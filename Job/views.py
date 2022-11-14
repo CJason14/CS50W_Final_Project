@@ -297,6 +297,19 @@ def new_job(request):
             language = English.objects.all()
         else:
             language = German.objects.all()
+        if request.method == "POST":
+            title = request.POST["title"]
+            description = request.POST["description"]
+            salary = request.POST["salary"]
+            category = request.POST["category"]
+            Job.objects.create(
+                company_key = request.user.username,
+                title = title,
+                description = description,
+                salary = salary,
+                category = category
+            )
+            return HttpResponseRedirect(reverse("homepage"))
         return render(request, "new_job.html", {"language": language})
 
 def deleteimages():
@@ -345,6 +358,10 @@ def applications_form(request):
                 visible = False,
                 accepted = True
             )
+            Chat.objects.create(
+                company = request.user.username,
+                user = username
+            )
         else:
             Application.objects.filter(user_id = username, company_name = request.user.username, id = id).update(
                 visible = False,
@@ -368,3 +385,4 @@ def apply(request):
         return JsonResponse({"Applied": "1"})
     else:
         return JsonResponse({"NoResponse": "1"})
+
